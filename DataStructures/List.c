@@ -2,7 +2,7 @@
 #include<stdio.h>
 #define MAX_SIZE 100
 int list[MAX_SIZE];
-int size;
+int size = 0;
 
 //insertion functions
 void insertBeginning(int x){
@@ -75,12 +75,9 @@ void show(){
   }
   printf("\n");
 }
-//"kind of" a constructor
-void start(){
-  size = 0;
-}
+
 int main(void){
-  start(7);
+
   insertBeginning(1);
   insert(2,1);
   insertEnd(3);
