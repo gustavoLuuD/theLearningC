@@ -1,11 +1,16 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int main(){
   printf("**********************************\n");
   printf("*  Welcome to the guessing game! *\n");
   printf("**********************************\n");
 
-  int secretNumber = 42;
+  int seconds = time(0);
+  srand(seconds);
+  int random = rand();
+  int secretNumber = random % 100;
   int score = 1000;
   int guess;
   int numberOfAttempts = 3;
@@ -20,7 +25,7 @@ int main(){
     if(gotIt){
       printf("You are goddam right ;)\n\n");
     }
-    else if(guess < secretNumber){
+    else if(guess > secretNumber){
       printf("The secret number is lower\n\n");
     }
     else {
@@ -33,6 +38,7 @@ int main(){
 
   if(numberOfAttempts == 0 && gotIt == 0){
     printf("YOU LOSE\n");
+    printf("The secret number was %i\n",secretNumber);
   }
   else{
     printf("YOU WIN\n");
