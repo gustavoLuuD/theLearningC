@@ -2,6 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
+void start(){
+  printf("\t**********************************\n");
+  printf("\t*         The hangman game       *\n");
+  printf("\t**********************************\n\n");
+}
+
+void guess(char guesses[26], int attemps){
+  char guess;
+  printf("\nmake a guess :");
+  scanf(" %c", &guess);
+
+  guesses[attemps] = guess;
+  attemps++;
+}
 
 int main(){
   char secretword [20];
@@ -10,7 +24,9 @@ int main(){
   int attemps = 0;
   int gotit = 0;
   int hanged = 1;
-  int c = 0;
+  int level = 10;
+
+  start();
   do{
     //loop that shows the _
     printf("\t");
@@ -34,14 +50,9 @@ int main(){
       }
     }
     printf("\n");
-
-    char guess;
-    printf("\nmake a guess :");
-    scanf(" %c", &guess);
-
-    guesses[attemps] = guess;
+    guess(guesses,attemps);
     attemps++;
-    c++;
-  } while(/*!gotit && !hanged*/c < 8);
+
+  } while(attemps < level);
   return 0;
 }
