@@ -8,20 +8,20 @@ void start(){
   printf("\t**********************************\n\n");
 }
 
-void guess(char guesses[26], int attemps){
+void makeguess(char guesses[26], int  *attempts){
   char guess;
-  printf("\nmake a guess :");
+  printf("\nMake a guess :");
   scanf(" %c", &guess);
 
-  guesses[attemps] = guess;
-  attemps++;
+  guesses[(*attempts)] = guess;
+  (*attempts)++;
 }
 
 int main(){
   char secretword [20];
   sprintf(secretword, "MELANCIA");
   char guesses[26];
-  int attemps = 0;
+  int attempts = 0;
   int gotit = 0;
   int hanged = 1;
   int level = 10;
@@ -34,12 +34,10 @@ int main(){
 
       int found = 0;
 
-      for(int j = 0; j < attemps; j++){
+      for(int j = 0; j < attempts; j++){
         if(guesses[j] == secretword[i]){
           found = 1;
           break;
-        }
-        else{
         }
       }
       if(found){
@@ -50,9 +48,8 @@ int main(){
       }
     }
     printf("\n");
-    guess(guesses,attemps);
-    attemps++;
 
-  } while(attemps < level);
+    makeguess(guesses, &attempts);
+  } while(attempts < level);
   return 0;
 }
