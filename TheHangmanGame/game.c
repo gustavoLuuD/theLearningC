@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "game.h"
+
+void stat();
+void makeguess();
+int alreadyguessed(char letter);
+int hanged();
+int won();
+void drawn();
+
+char secretword [20];
+char guesses[26];
+int attempts = 0;
 
 void start(){
   printf("\t**********************************\n");
@@ -8,53 +20,79 @@ void start(){
   printf("\t**********************************\n\n");
 }
 
-void makeguess(char guesses[26], int  *attempts){
+void makeguess(){
   char guess;
   printf("\nMake a guess :");
   scanf(" %c", &guess);
 
-  guesses[(*attempts)] = guess;
-  (*attempts)++;
+  guesses[(attempts)] = guess;
+  (attempts)++;
 }
 
- int alreadyguessed(char letter, char guesses[26], int attempts){
-  int found = 0;
+int alreadyguessed(char letter){
+ int found = 0;
 
-  for(int j = 0; j < attempts; j++){
-    if(guesses[j] == letter){
-      found = 1;
-      break;
+ for(int j = 0; j < attempts; j++){
+   if(guesses[j] == letter){
+     found = 1;
+     break;
+   }
+ }
+ return found;
+}
+
+int hanged(){
+  int mistakes = 0;
+
+  for(int i = 0; i < attempts; i++){
+    int found = 0;
+
+    for(int j = 0; j < strlen(secretword); j++){
+      if(guesses[i] == secretword[j]){
+        found = 1;
+        break;
+      }
+    }
+    if(!found) mistakes++;
+  }
+  return mistakes >= 5;
+}
+
+int won(){
+  for(int i = 0; i < strlen(secretword); i++){
+    if(!alreadyguessed(secretword[i])){
+      return 0;
     }
   }
-  return found;
+  return 1;
 }
+void drawn(){
+  printf("\t");
+  for(int i = 0; i < strlen(secretword); i++){
+
+    //put a funcion here
+    int found = alreadyguessed(secretword[i]);
+    if(found){
+      printf("%c", secretword[i]);
+    }
+    else{
+      printf(" _ ");
+    }
+  }
+  printf("\n");
+}
+
 int main(){
-  char secretword [20];
   sprintf(secretword, "MELANCIA");
-  char guesses[26];
-  int attempts = 0;
   int gotit = 0;
-  int hanged = 1;
   int level = 10;
 
   start();
   do{
-    //loop that shows the _
-    printf("\t");
-    for(int i = 0; i < strlen(secretword); i++){
 
-      //put a funcion here
-      int found = alreadyguessed(secretword[i], guesses, attempts);
-      if(found){
-        printf("%c", secretword[i]);
-      }
-      else{
-        printf(" _ ");
-      }
-    }
-    printf("\n");
+    drawn();
+    makeguess();
 
-    makeguess(guesses, &attempts);
-  } while(attempts < level);
+  } while(!won() && !hanged());
   return 0;
 }
