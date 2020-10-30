@@ -17,6 +17,17 @@ void makeguess(char guesses[26], int  *attempts){
   (*attempts)++;
 }
 
+ int alreadyguessed(char letter, char guesses[26], int attempts){
+  int found = 0;
+
+  for(int j = 0; j < attempts; j++){
+    if(guesses[j] == letter){
+      found = 1;
+      break;
+    }
+  }
+  return found;
+}
 int main(){
   char secretword [20];
   sprintf(secretword, "MELANCIA");
@@ -32,14 +43,8 @@ int main(){
     printf("\t");
     for(int i = 0; i < strlen(secretword); i++){
 
-      int found = 0;
-
-      for(int j = 0; j < attempts; j++){
-        if(guesses[j] == secretword[i]){
-          found = 1;
-          break;
-        }
-      }
+      //put a funcion here
+      int found = alreadyguessed(secretword[i], guesses, attempts);
       if(found){
         printf("%c", secretword[i]);
       }
