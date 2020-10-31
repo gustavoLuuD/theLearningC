@@ -3,9 +3,9 @@
 #include <string.h>
 #include <time.h>
 #include "game.h"
-
-char secretword[20];
-char guesses[26];
+#define WORD_SIZE 30
+char secretword[WORD_SIZE];
+char guesses[WORD_SIZE];
 int attempts = 0;
 
 void start(){
@@ -46,6 +46,7 @@ void choosesecretword(){
   printf("secretword -> %s\n",secretword);
   fclose(f);
 }
+
 int alreadyguessed(char letter){
  int found = 0;
 
@@ -57,8 +58,7 @@ int alreadyguessed(char letter){
  }
  return found;
 }
-
-int hanged(){
+int missedguesses(){
   int mistakes = 0;
 
   for(int i = 0; i < attempts; i++){
@@ -72,9 +72,18 @@ int hanged(){
     }
     if(!found) mistakes++;
   }
-  return mistakes >= 5;
+  return mistakes;
 }
 
+int hanged(){
+  return missedguesses() >= 5;
+}
+
+void skipline(int nlines){
+  for(int i = nlines; i > 0; i--){
+    printf("\n");
+  }
+}
 int won(){
   for(int i = 0; i < strlen(secretword); i++){
     if(!alreadyguessed(secretword[i])){
@@ -84,8 +93,19 @@ int won(){
   return 1;
 }
 void drawn(){
+  int errors = missedguesses();
+    skipline(10);
 
-  printf("\t");
+    printf("  _______       \n");
+    printf(" |/      |      \n");
+    printf(" |      %c%c%c  \n", (errors>=1 ? '(':' '), (errors>=1?'_':' '), (errors>=1?')':' '));
+    printf(" |      %c%c%c  \n", (errors>=3 ? '\\':' '), (errors>=2?'|':' '), (errors>=3?'/': ' '));
+    printf(" |       %c     \n", (errors>=2 ? '|':' '));
+    printf(" |      %c %c   \n", (errors>=4 ? '/':' '), (errors>=4?'\\':' '));
+    printf(" |              \n");
+    printf("_|___           \n");
+    skipline(2);
+
   for(int i = 0; i < strlen(secretword); i++){
 
     //put a funcion here
@@ -141,6 +161,11 @@ int main(){
     makeguess();
 
   } while(!won() && !hanged());
-  addword();
+  if(won() && !hanged()){
+    printf("You won, yey\n");
+  }
+  else{
+    printf("You lose, loser\n");
+  }
   return 0;
 }

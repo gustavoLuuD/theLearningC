@@ -6,3 +6,4 @@ int won();
 void drawn();
 void choosesecretword();
 void addword();
+int missedguesses();
