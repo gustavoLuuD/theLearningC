@@ -1,3 +1,10 @@
-apple
-banana
-orange
+10
+Aplle
+MELANCIA
+GRAPE
+ORANGE
+ORANGE
+ORANGE
+ORANGE
+ORANGE
+ORANGE
