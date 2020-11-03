@@ -1,0 +1,2 @@
+void readmap();
+void allocMap();
