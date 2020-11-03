@@ -20,4 +20,14 @@ int main(void){
   printf("%d\n",a);
   sum(&a, &b, &soma);
   printf("This is the sum: %i\n", soma);
+
+  printf("---------------------------------------------\n");
+
+  //we do some memory allocation with malloc
+  int* p = malloc(sizeof(int));
+  *p = 10;
+
+  printf("Malloc on the int %d\n",*p);
+  free(p);
+  return 0;
 }
