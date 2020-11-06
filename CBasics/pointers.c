@@ -24,10 +24,16 @@ int main(void){
   printf("---------------------------------------------\n");
 
   //we do some memory allocation with malloc
+
   int* p = malloc(sizeof(int));
   *p = 10;
+  printf("Malloc on %p the int %d\n",p, *p);
 
-  printf("Malloc on the int %d\n",*p);
+  char *letter = malloc(sizeof(char));
+  *letter = 'c';
+  printf("%c\n", *letter);
+
+
   free(p);
   return 0;
 }
