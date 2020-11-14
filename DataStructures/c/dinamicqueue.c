@@ -37,8 +37,8 @@ int removeelement(){
 }
 void printqueue(){
   int contador = 0;
-  Celula *i = primeiro;
-  while(i != ultimo){
+  Celula *i = primeiro->prox;
+  while(i != NULL){
     printf("%d - %d, ",contador, i->elemento);
     i = i->prox;
     contador++;

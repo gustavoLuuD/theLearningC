@@ -43,7 +43,6 @@ void choosesecretword(){
   for(int i = 0; i < randomnumber; i++){
     fscanf(f, "%s", secretword);
   }
-  printf("secretword -> %s\n",secretword);
   fclose(f);
 }
 
