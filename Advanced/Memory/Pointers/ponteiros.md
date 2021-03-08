@@ -9,3 +9,7 @@ ponteiros.
 - Não utilizamos & em arrays pois o c os passa automaticamente.
 - O *"Princípio do menor privilégio"* dita que sempre devemos conceder a uma função acesso suficiente aos dados em seus
 parâmetros para que realize a tarefa especificada, nada mais que isso.
+
+#### O dilema tempo espaço
+"Se a memória for pequena e a eficiência de execução for um problema, use ponteiros. Se a memória for abundante e a eficiência
+não for importante passe dados por valor, para impor o *princípio do menor privilégio*."
